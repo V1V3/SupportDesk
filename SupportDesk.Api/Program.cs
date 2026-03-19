@@ -49,9 +49,6 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-Console.WriteLine($"DefaultConnection = {connectionString}");
-
 builder.Services.AddProblemDetails();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -93,15 +90,8 @@ var app = builder.Build();
 app.UseExceptionHandler();
 app.UseSerilogRequestLogging();
 
-// Swagger in Development only
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-// For now, keep HTTP simple
-// app.UseHttpsRedirection();
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseAuthentication();
 app.UseAuthorization();
@@ -112,6 +102,8 @@ using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     var passwordHasher = scope.ServiceProvider.GetRequiredService<IPasswordHasher<User>>();
+
+    await dbContext.Database.MigrateAsync();
 
     var existingUser = await dbContext.Users.FirstOrDefaultAsync(u => u.Username == "demo");
 
