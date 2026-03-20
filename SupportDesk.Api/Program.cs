@@ -98,6 +98,9 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+//Reroute root URL traffic to swagger
+app.MapGet("/", () => Results.Redirect("/swagger"));
+
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
