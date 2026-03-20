@@ -1,28 +1,56 @@
 # SupportDesk.Api
 
-SupportDesk.Api is an ASP.NET Core 8 Web API portfolio project for ticket management. It demonstrates modern backend development concepts including JWT authentication, EF Core with PostgreSQL, user registration, role and ownership-based authorization, pagination, filtering, sorting, structured logging, and integration testing.
+SupportDesk.Api is a production-style ASP.NET Core 8 Web API for ticket management, built and deployed to demonstrate modern backend development practices including authentication, authorization, database integration, and API design.
+
+## Live Demo
+
+Swagger UI:
+https://supportdesk-5pob.onrender.com/swagger
+
+Demo Credentials (admin account that has no restrictions):
+Username: demo  
+Password: Pass123!
+
+Users can also register and log in to their own created accounts and authorize them to interact with the API.
 
 ## Tech Stack
 
 - ASP.NET Core 8 Web API
-- EF Core 8
-- PostgreSQL
+- Entity Framework Core 8
+- PostgreSQL (Render hosted)
 - JWT Authentication
-- Serilog
-- xUnit integration tests
+- Serilog (structured logging)
+- xUnit (integration testing)
+- Docker (deployment)
 
 ## Features
 
+### Authentication & Users
 - User registration with hashed passwords
-- Login with JWT bearer tokens
+- JWT-based authentication
 - Current user endpoint
-- Ticket CRUD
+
+### Ticket System
+- Full CRUD operations
 - Ownership-based authorization
-- Admin override for ticket updates/deletes
+- Admin override permissions
+
+### Querying & Performance
 - Pagination
-- Filtering and sorting on ticket list
-- Structured logging
-- Integration tests
+- Filtering (status, creator, search)
+- Sorting (multiple fields)
+
+### Reliability & Observability
+- Structured logging with Serilog
+- Integration tests using WebApplicationFactory
+
+## Deployment
+
+The API is containerized with Docker and deployed on Render.
+
+- Automatic database migrations on startup
+- Connected to managed PostgreSQL instance
+- Publicly accessible via Swagger UI
 
 ## Authorization Rules
 
@@ -57,9 +85,12 @@ Supported `sortDirection` values:
 
 ## Run Locally
 
-1. Start PostgreSQL
-2. Update `appsettings.Development.json` if needed
-3. Apply migrations
+1. Clone the repository
+2. Configure PostgreSQL connection in `appsettings.Development.json`
+3. Apply migrations:
 
-```bash
-dotnet ef database update
+   dotnet ef database update
+
+4. Run the API:
+
+   dotnet run
