@@ -2,17 +2,34 @@
 
 SupportDesk.Api is a production-style ASP.NET Core 8 Web API for ticket management, built and deployed to demonstrate modern backend development practices including authentication, authorization, database integration, and API design.
 
+This project was built to bridge the gap between basic CRUD applications and real-world backend systems by incorporating authentication, authorization, database persistence, structured logging, and deployment.
+
 ## Live Demo
 
 Swagger UI:
 https://supportdesk-5pob.onrender.com/swagger
 
-Demo Credentials (admin account that has no restrictions):
+Demo Credentials (Admin account with full permissions):
 
 Username: demo  
 Password: Pass123!
 
 Users can also register and log in to their own created accounts and authorize them to interact with the API.
+
+## Key Concepts Demonstrated
+
+- RESTful API design
+- Layered architecture (controllers + services + DTOs)
+- Secure authentication with JWT
+- Role-based and ownership-based authorization
+- Database modeling and migrations with EF Core
+- Query optimization with pagination, filtering, and sorting
+- Production-ready deployment using Docker and Render
+
+## Preview
+
+<img width="1441" height="936" alt="image" src="https://github.com/user-attachments/assets/f98e2820-e10a-42dc-9710-fd56d79060e6" />
+
 
 ## Tech Stack
 
